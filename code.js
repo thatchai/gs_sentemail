@@ -26,8 +26,8 @@ function sendEmails() {
     subject = dataTmpl[indexTmp][2];
     
     //msg
-    msg = dataTmpl[indexTmp][1]
-    msg = msg.replace('<name>', name);
+    msg = dataTmpl[indexTmp][1];
+    msg = replaceAll(msg, '<name>', name);
     //Logger.log(msg);
     
     //sent
@@ -45,4 +45,9 @@ function getDataRankValue(sheet){
   var numCol = sheet.getLastColumn();
   var dataRange = sheet.getRange(startRow, 1, numRows, numCol);
   return dataRange.getValues();
+}
+
+function replaceAll(str, beforeStr, afterStr){
+  var reg = new RegExp(beforeStr, "g");
+  return str.replace(reg, afterStr);
 }
