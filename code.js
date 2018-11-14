@@ -8,6 +8,8 @@ function sendEmails() {
   var dataTmpl = getDataRankValue(sheetTmpl);
   var dataSent = getDataRankValue(sheetSent);
   
+  //var image = UrlFetchApp.fetch('http://00000.jpg');
+
   //
   var row;
   var email;
@@ -26,12 +28,25 @@ function sendEmails() {
     subject = dataTmpl[indexTmp][2];
     
     //msg
-    msg = dataTmpl[indexTmp][1];
+    msg = dataTmpl[indexTmp][1]
+    //msg = msg.replace('<name>/g', name);
     msg = replaceAll(msg, '<name>', name);
-    //Logger.log(msg);
+    //Logger.log(dataTmpl[indexTmp][2]);
     
     //sent
-    MailApp.sendEmail(email, subject, msg);
+    //MailApp.sendEmail(email, subject, msg);
+    
+    
+    MailApp.sendEmail({
+      to: email,
+      subject: subject,
+      htmlBody: msg
+      //inlineImages: {
+      //  img1: image.getBlob()
+      //}
+    });
+    
+    
   }
 }
 
